@@ -1,13 +1,19 @@
 #include <string>
 
+#ifndef PIECE_H_
+#define PIECE_H_
+
 enum PieceType {Pawn, Bishop, Knight, Rook, Queen, King};
+
+enum PieceColor {White, Black};
 
 class Piece {
     public:
         Piece();
         Piece(PieceType p);
         virtual ~Piece();
-        bool color; // true if white, false if black
+        PieceColor color;
         PieceType type;
 };
 
+#endif

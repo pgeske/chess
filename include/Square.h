@@ -1,4 +1,6 @@
 #include "Piece.h"
+#ifndef SQUARE_H_
+#define SQUARE_H_
 
 class Square {
     public:
@@ -8,3 +10,6 @@ class Square {
         bool attackedBlack;
         Piece* piece;
 };
+
+
+#endif

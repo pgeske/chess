@@ -1,4 +1,6 @@
 #include "Board.h"
+#include "Square.h"
+#include <vector>
 
 Board::Board() {
     return;
@@ -12,6 +14,13 @@ Board::~Board() {
  * Initializes board with 8 x 8 Squares
  */
 void Board::initialize() {
+    this->board = std::vector<std::vector<Square*>>();
+    for (int i = 0; i < 8; i++) {
+        this->board.push_back(std::vector<Square*>());
+        for (int j = 0; j < 8; j++) {
+            this->board[i].push_back(new Square());
+        }
+    }
     return;
 }
 
