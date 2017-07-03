@@ -9,6 +9,8 @@ class Square {
         bool attackedWhite;
         bool attackedBlack;
         Piece* piece;
+        Piece* liftPiece();
+        void removePiece();
 };
 
 

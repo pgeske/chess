@@ -93,6 +93,11 @@ void Board::start() {
  * returns 1.
  */
 int Board::execute(int r1, int c1, int r2, int c2) {
+    Square* source = this->board[r1][c1];
+    Square* dest = this->board[r2][c2];
+    Piece* piece = source->liftPiece();
+    dest->removePiece();
+    dest->piece = piece;
     return 0;
 }
 
