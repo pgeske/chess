@@ -2,16 +2,35 @@
 #include "Square.h"
 #include <vector>
 
+/**
+ * Returns new Board which is initialized with
+ * empty Squares.
+ */
 Board::Board() {
+    this->initialize();
     return;
 }
 
 Board::~Board() {
+    this->clear();
     return;
 }
 
 /**
- * Initializes board with 8 x 8 Squares
+ * Deletes every square in Board::board
+ */
+void Board::clear() {
+    for (int i = 0; i < this->board[i].size(); i++) {
+        this->board[i].clear();
+    }
+    this->board.clear();
+    return;
+}
+
+/**
+ * Sets Board::board to a 8 x 8 board with empty Squares.
+ * You should call Board::clear() first if there is an existing
+ * board.
  */
 void Board::initialize() {
     this->board = std::vector<std::vector<Square*>>();
@@ -26,18 +45,15 @@ void Board::initialize() {
 
 /**
  * Populates Squares in board with pieces in their 
- * starting positions.
+ * starting positions. clears and initializes first.
  */
 void Board::start() {
+    this->clear();
+    this->initialize();
+    // White
     return;
 }
 
-/**
- * Clears all pieces on the board.
- */
-void Board::clear() {
-    return;
-}
 
 
 /**

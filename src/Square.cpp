@@ -8,5 +8,6 @@ Square::Square() {
 }
 
 Square::~Square() {
+    delete this->piece;
     return;
 }
