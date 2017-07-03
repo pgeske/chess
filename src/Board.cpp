@@ -56,6 +56,31 @@ void Board::start() {
         this->board[1][col]->piece = new Piece(PieceType::Pawn, PieceColor::Black);
         // White Pawns
         this->board[6][col]->piece = new Piece(PieceType::Pawn, PieceColor::White);
+        // Rooks
+        if (col == 0 || col == 7) {
+            this->board[0][col]->piece = new Piece(PieceType::Rook, PieceColor::Black);
+            this->board[7][col]->piece = new Piece(PieceType::Rook, PieceColor::White);
+        }
+        // Bishops
+        else if (col == 1 || col == 6) {
+            this->board[0][col]->piece = new Piece(PieceType::Bishop, PieceColor::Black);
+            this->board[7][col]->piece = new Piece(PieceType::Bishop, PieceColor::White);
+        }
+        // Knights
+        else if (col == 2 || col == 5) {
+            this->board[0][col]->piece = new Piece(PieceType::Knight, PieceColor::Black);
+            this->board[7][col]->piece = new Piece(PieceType::Knight, PieceColor::White);
+        }
+        // Queens
+        else if (col == 3) {
+            this->board[0][col]->piece = new Piece(PieceType::Queen, PieceColor::Black);
+            this->board[7][col]->piece = new Piece(PieceType::Queen, PieceColor::White);
+        }
+        // Kings
+        else if (col == 4) {
+            this->board[0][col]->piece = new Piece(PieceType::King, PieceColor::Black);
+            this->board[7][col]->piece = new Piece(PieceType::King, PieceColor::White);
+        }
     }
     return;
 }
