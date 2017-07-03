@@ -11,6 +11,7 @@ class Piece {
     public:
         Piece();
         Piece(PieceType p);
+        Piece(PieceType p, PieceColor c);
         virtual ~Piece();
         PieceColor color;
         PieceType type;

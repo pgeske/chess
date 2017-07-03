@@ -10,6 +10,12 @@ Piece::Piece(PieceType p) {
     return;
 }
 
+Piece::Piece(PieceType p, PieceColor c) {
+    this->type = p;
+    this->color = c;
+    return;
+}
+
 Piece::~Piece() {
     return;
 }
