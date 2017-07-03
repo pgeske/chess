@@ -20,3 +20,27 @@ Piece::~Piece() {
     return;
 }
 
+std::string Piece::toString() {
+    std::string type;
+    std::string color;
+    if (this->type == PieceType::Pawn) {
+        type = "PAWN";
+    } else if (this->type == PieceType::Knight) {
+        type = "KNIGHT";
+    } else if (this->type == PieceType::Bishop) {
+        type = "BISHOP";
+    } else if (this->type == PieceType::King) {
+        type = "KING";
+    } else if (this->type == PieceType::Queen) {
+        type = "QUEEN";
+    } else  if (this->type == PieceType::Rook) {
+        type = "ROOK";
+    }
+
+    if (this->color == PieceColor::White) {
+        color = "W";
+    } else {
+        color = "B";
+    }
+    return color + "_" + type;
+}

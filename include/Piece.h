@@ -15,6 +15,7 @@ class Piece {
         virtual ~Piece();
         PieceColor color;
         PieceType type;
+        std::string toString();
 };
 
 #endif

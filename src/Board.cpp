@@ -51,9 +51,11 @@ void Board::initialize() {
 void Board::start() {
     this->clear();
     this->initialize();
-    for (int col = 0; col < 7; col++) {
+    for (int col = 0; col < 8; col++) {
         // Black Pawns
         this->board[1][col]->piece = new Piece(PieceType::Pawn, PieceColor::Black);
+        // White Pawns
+        this->board[6][col]->piece = new Piece(PieceType::Pawn, PieceColor::White);
     }
     return;
 }
