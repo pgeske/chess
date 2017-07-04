@@ -31,16 +31,16 @@ void Validator::clear() {
  * 
  */
 void Validator::initialize() {
-    this->attackBlack = std::vector< std::vector<Square*> >();
-    this->attackWhite = std::vector< std::vector<Square*> >();
+    this->attackBlack = std::vector< std::vector<bool> >();
+    this->attackWhite = std::vector< std::vector<bool> >();
     for (int i = 0; i < BOARD_SIZE; i++) {
-        this->attackWhite.push_back(std::vector<Square*>());
+        this->attackWhite.push_back(std::vector<bool>());
         for (int j = 0; j < BOARD_SIZE; j++) {
             this->attackWhite[i].push_back(1);
         }
     }
     for (int i = 0; i < BOARD_SIZE; i++) {
-        this->attackBlack.push_back(std::vector<Square*>());
+        this->attackBlack.push_back(std::vector<bool>());
         for (int j = 0; j < BOARD_SIZE; j++) {
             this->attackBlack[i].push_back(1);
         }
@@ -322,6 +322,11 @@ std::vector<std::pair<int, int>> coordinates Validator::generateKing(int r1, int
  * board and stores it in a 2D array called attackBlack/White corresponding to the turn.
  */
 void Validator::populateAttackMap(Board *board){
+	//Clear and initialize the attack maps
+	this->clear();
+	this->initialize();
+
+
 	//Check turn
 	for (int row=0; row<BOARD_SIZE; row++){
 		for (int col=0; col<BOARD_SIZE; col++){
