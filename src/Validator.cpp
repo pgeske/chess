@@ -71,12 +71,41 @@ std::vector<Square*> Validator::allowedPawn(Board *board, int r1, int c1) {
             }
         } 
     }
+    return possible;
 }
 
 /**
  * Like Validator::allowed, but assumes Rook is at that coordinate.
  */
 std::vector<Square*> Validator::allowedRook(Board *board, int r1, int c1) {
+    std::vector<Square*> possible;
+    PieceColor color = board->board[r1][c1]->piece->color;
+    PieceColor opposite = (color == PieceColor::White) ? PieceColor::Black : PieceColor::White;
+    // Left
+    for (int col = c1 - 1; col >= 0; col--) {
+        if (board->board[r1][col]->piece->color == color) break;
+        possible.push_back(board->board[r1][col]);
+        if (board->board[r1][col]->piece->color == opposite) break;
+    }
+    // Right
+    for (int col = c1 + 1; col < BOARD_SIZE; col++) {
+        if (board->board[r1][col]->piece->color == color) break;
+        possible.push_back(board->board[r1][col]);
+        if (board->board[r1][col]->piece->color == opposite) break;
+    }
+    // Up
+    for (int row = row + 1; row < BOARD_SIZE; row++) {
+        if (board->board[row][c1]->piece->color == color) break;
+        possible.push_back(board->board[row][c1]);
+        if (board->board[row][c1]->piece->color == opposite) break;
+    }
+    // Down
+    for (int row = row - 1; row >= 0; row--) {
+        if (board->board[row][c1]->piece->color == color) break;
+        possible.push_back(board->board[row][c1]);
+        if (board->board[row][c1]->piece->color == opposite) break;
+    }
+    return possible;
 }
 
 /**
