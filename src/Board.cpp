@@ -18,7 +18,7 @@ Board::~Board() {
  * Deletes every square in Board::board
  */
 void Board::clear() {
-    for (int i = 0; i < this->board[i].size(); i++) {
+    for (int i = 0; i < BOARD_SIZE; i++) {
         this->board[i].clear();
     }
     this->board.clear();
