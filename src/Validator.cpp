@@ -35,6 +35,41 @@ std::vector<Square*> Validator::allowed(Board *board, int r1, int c1) {
     return allowedSquares;
 }
 
+/**
+ * Like Validator::allowed, but assumes Pawn is at that coordinate.
+ */
 std::vector<Square*> Validator::allowedPawn(Board *board, int r1, int c1) {
     Piece *piece = board->board[r1][c1]->piece;
 }
+
+/**
+ * Like Validator::allowed, but assumes Rook is at that coordinate.
+ */
+std::vector<Square*> Validator::allowedRook(Board *board, int r1, int c1) {
+}
+
+/**
+ * Like Validator::allowed, but assumes Knight is at that coordinate.
+ */
+std::vector<Square*> Validator::allowedKnight(Board *board, int r1, int c1) {
+}
+
+/**
+ * Like Validator::allowed, but assumes Bishop is at that coordinate.
+ */
+std::vector<Square*> Validator::allowedBishop(Board *board, int r1, int c1) {
+}
+
+/**
+ * Like Validator::allowed, but assumes Queen is at that coordinate.
+ */
+std::vector<Square*> Validator::allowedQueen(Board *board, int r1, int c1) {
+}
+
+
+/**
+ * Like Validator::allowed, but assumes King is at that coordinate.
+ */
+std::vector<Square*> Validator::allowedKing(Board *board, int r1, int c1) {
+}
+
