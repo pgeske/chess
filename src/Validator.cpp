@@ -36,13 +36,13 @@ void Validator::initialize() {
     for (int i = 0; i < BOARD_SIZE; i++) {
         this->attackWhite.push_back(std::vector<Square*>());
         for (int j = 0; j < BOARD_SIZE; j++) {
-            this->attackWhite[i].push_back(new Square());
+            this->attackWhite[i].push_back(1);
         }
     }
     for (int i = 0; i < BOARD_SIZE; i++) {
         this->attackBlack.push_back(std::vector<Square*>());
         for (int j = 0; j < BOARD_SIZE; j++) {
-            this->attackBlack[i].push_back(new Square());
+            this->attackBlack[i].push_back(1);
         }
     }
     return;
@@ -56,31 +56,103 @@ bool Validator::validate(Board *board, int r1, int c1, int r2, int c2) {
     return true;
 }
 
+
+bool Validator::boundsCheck(int r1, int c1){
+	if(r1>=0 && r1<BOARD_SIZE && c1>=0 && c1<BOARD_SIZE){
+		return 1;
+	} else {
+		return 0;
+	}
+}
+
+
 /**
  * Populates an attack map for a particular turn (color), given the current state of the
  * board and stores it in a 2D array called attackBlack/White corresponding to the turn.
  */
 void Validator::populateAttackMap(Board *board){
+	//Check turn
+	for (int row=0; row<BOARD_SIZE; row++){
+		for (int col=0; col<BOARD_SIZE; col++){
+			Piece *piece = board->board[row][col]->piece;
+			switch (piece->type){
+				case PieceType::Pawn:
+					if(board->turn == PieceColor::Black) {
+						this->populateAttackMapPawn(board, row, col, 1);
+					} else {
+						this->populateAttackMapPawn(board, row, col, 0);
+					}
+				case PieceType::Rook:
+					if(board->turn == PieceColor::Black) {
+						this->populateAttackMapRook(board, row, col, 1);
+					} else {
+						this->populateAttackMapRook(board, row, col, 0);
+					}
+				case PieceType::Bishop:
+					if(board->turn == PieceColor::Black) {
+						this->populateAttackMapBishop(board, row, col, 1);
+					} else {
+						this->populateAttackMapBishop(board, row, col, 0);
+					}
+				case PieceType::Queen:
+					if(board->turn == PieceColor::Black) {
+						this->populateAttackMapQueen(board, row, col, 1);
+					} else {
+						this->populateAttackMapQueen(board, row, col, 0);
+					}
+				case PieceType::King:
+					if(board->turn == PieceColor::Black) {
+						this->populateAttackMapKing(board, row, col, 1);
+					} else {
+						this->populateAttackMapKing(board, row, col, 0);
+					}
+				case default:
+					return;
+			}
+		}
+	}
 	return;
 }
 
-void Validator::populateAttackMapPawn(Board *board, int r1, int c1){
+void Validator::populateAttackMapPawn(Board *board, int r1, int c1, bool isBlack){
+    
+    std::vector<std::pair<int, int>> coordinates;
+    if(this->boundsCheck(r1+1,c1)){
+    	coordinates.push_back(std::make_pair(r1 + 1, c1));
+	}
+    if(this->boundsCheck(r1+1,c1-1)){
+    	coordinates.push_back(std::make_pair(r1 + 1, c1-1));
+	}
+	
+	for (int i=0; i<coordinates.size(); i++){
+		int row = coordinates[i].first;
+		int col = coordinates[i].second;
+    	PieceColor opposite = (isBlack) ? PieceColor::White : PieceColor::Black;
+		if((board->board[row][col]->piece->type != PieceType::None) && (board->board[row][col]->piece->color == opposite)){
+			if(isBlack){
+				this->attackWhite[row][col] = 0;
+			} else {
+				this->attackBlack[row][col] = 0;
+			}
+		} 
+	}
+
 	return;
 }
 
-void Validator::populateAttackMapRook(Board *board, int r1, int c1){
+void Validator::populateAttackMapRook(Board *board, int r1, int c1, bool isBlack){
 	return;
 }
 
-void Validator::populateAttackMapBishop(Board *board, int r1, int c1){
+void Validator::populateAttackMapBishop(Board *board, int r1, int c1, bool isBlack){
 	return;
 }
 
-void Validator::populateAttackMapQueen(Board *board, int r1, int c1){
+void Validator::populateAttackMapQueen(Board *board, int r1, int c1, bool isBlack){
 	return;
 }
 
-void Validator::populateAttackMapKing(Board *board, int r1, int c1){
+void Validator::populateAttackMapKing(Board *board, int r1, int c1, bool isBlack){
 	return;
 }
 
