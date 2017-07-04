@@ -3,9 +3,9 @@
 #ifndef PIECE_H_
 #define PIECE_H_
 
-enum PieceType {Pawn, Bishop, Knight, Rook, Queen, King};
+enum PieceType {Pawn, Bishop, Knight, Rook, Queen, King, None };
 
-enum PieceColor {White, Black};
+enum PieceColor {White, Black, Na };
 
 class Piece {
     public:

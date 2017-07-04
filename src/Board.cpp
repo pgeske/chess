@@ -1,7 +1,4 @@
 #include "Board.h"
-#include "Square.h"
-#include "Piece.h"
-#include <vector>
 
 /**
  * Returns new Board which is initialized with
@@ -34,10 +31,10 @@ void Board::clear() {
  * board.
  */
 void Board::initialize() {
-    this->board = std::vector<std::vector<Square*>>();
-    for (int i = 0; i < 8; i++) {
+    this->board = std::vector< std::vector<Square*> >();
+    for (int i = 0; i < BOARD_SIZE; i++) {
         this->board.push_back(std::vector<Square*>());
-        for (int j = 0; j < 8; j++) {
+        for (int j = 0; j < BOARD_SIZE; j++) {
             this->board[i].push_back(new Square());
         }
     }
@@ -51,7 +48,7 @@ void Board::initialize() {
 void Board::start() {
     this->clear();
     this->initialize();
-    for (int col = 0; col < 8; col++) {
+    for (int col = 0; col < BOARD_SIZE; col++) {
         // Black Pawns
         this->board[1][col]->piece = new Piece(PieceType::Pawn, PieceColor::Black);
         // White Pawns
@@ -81,6 +78,11 @@ void Board::start() {
             this->board[0][col]->piece = new Piece(PieceType::King, PieceColor::Black);
             this->board[7][col]->piece = new Piece(PieceType::King, PieceColor::White);
         }
+        //None
+        this->board[2][col]->piece = new Piece(PieceType::None, PieceColor::Na);
+        this->board[3][col]->piece = new Piece(PieceType::None, PieceColor::Na);
+        this->board[4][col]->piece = new Piece(PieceType::None, PieceColor::Na);
+        this->board[5][col]->piece = new Piece(PieceType::None, PieceColor::Na);
     }
     return;
 }
@@ -109,3 +111,20 @@ bool Board::isValid(int r1, int c1, int r2, int c2) {
     return false;
 }
 
+void Board::draw_board(){
+	for (int row=0; row<BOARD_SIZE; row++){
+		std::cout<<"  ---------- "<<"  ----------  "<<"  ---------- "<<"  ---------- "<<"  ---------- "<<"  ---------- "<<"  ---------- "<<"  ---------- "<<std::endl;
+		std::cout<<"|  "<<this->board[row][0]->piece->toString()<<"  |  ";
+		std::cout<<this->board[row][1]->piece->toString() <<"  |  ";
+		std::cout<<this->board[row][2]->piece->toString() <<"  |  ";
+		std::cout<<this->board[row][3]->piece->toString() <<"  |  ";
+		std::cout<<this->board[row][4]->piece->toString() <<"  |  ";
+		std::cout<<this->board[row][5]->piece->toString() <<"  |  ";
+		std::cout<<this->board[row][6]->piece->toString() <<"  |  ";
+		std::cout<<this->board[row][7]->piece->toString() <<"  |  ";
+		std::cout<<std::endl;
+	}
+	std::cout<<"  ---------- "<<"  ----------  "<<"  ---------- "<<"  ---------- "<<"  ---------- "<<"  ---------- "<<"  ---------- "<<"  ---------- "<<std::endl;
+	return;
+	
+}

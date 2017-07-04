@@ -18,7 +18,7 @@ Square::~Square() {
  */
 Piece* Square::liftPiece() {
     Piece* piece = this->piece;
-    this->piece = 0;
+    this->piece = new Piece(PieceType::None, PieceColor::Na);
     return piece;
 }
 
@@ -27,5 +27,6 @@ Piece* Square::liftPiece() {
  * be called when the Piece is conquered.
  */
 void Square::removePiece() {
-    delete this->piece;
+    this->piece = new Piece(PieceType::None, PieceColor::Na);
+    return;
 }

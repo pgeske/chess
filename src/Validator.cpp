@@ -1,5 +1,4 @@
 #include "Validator.h"
-#include "Piece.h"
 
 /**
  * Returns true if move on board->board[r1][c1] to board->board[r2][c2]

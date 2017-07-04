@@ -24,23 +24,27 @@ std::string Piece::toString() {
     std::string type;
     std::string color;
     if (this->type == PieceType::Pawn) {
-        type = "PAWN";
+        type = "PAWN  ";
     } else if (this->type == PieceType::Knight) {
         type = "KNIGHT";
     } else if (this->type == PieceType::Bishop) {
         type = "BISHOP";
     } else if (this->type == PieceType::King) {
-        type = "KING";
+        type = "KING  ";
     } else if (this->type == PieceType::Queen) {
-        type = "QUEEN";
+        type = "QUEEN ";
     } else  if (this->type == PieceType::Rook) {
-        type = "ROOK";
+        type = "ROOK  ";
+    } else {
+    	type = "      ";
     }
 
     if (this->color == PieceColor::White) {
         color = "W";
-    } else {
+    } else if (this->color == PieceColor::Black){
         color = "B";
+    } else {
+    	color = " ";
     }
     return color + "_" + type;
 }
