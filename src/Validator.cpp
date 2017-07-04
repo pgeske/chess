@@ -9,6 +9,30 @@ bool Validator::validate(Board *board, int r1, int c1, int r2, int c2) {
     return true;
 }
 
+void Validator::populateAttackMap(Board *board){
+	return;
+}
+
+void Validator::populateAttackMapPawn(Board *board, int r1, int c1){
+	return;
+}
+
+void Validator::populateAttackMapRook(Board *board, int r1, int c1){
+	return;
+}
+
+void Validator::populateAttackMapBishop(Board *board, int r1, int c1){
+	return;
+}
+
+void Validator::populateAttackMapQueen(Board *board, int r1, int c1){
+	return;
+}
+
+void Validator::populateAttackMapKing(Board *board, int r1, int c1){
+	return;
+}
+
 /**
  * Returns a vector of all Square*s which the piece in board->board[r1][c1]
  * can travel to.
@@ -38,6 +62,8 @@ std::vector<Square*> Validator::allowed(Board *board, int r1, int c1) {
 
 /**
  * Like Validator::allowed, but assumes Pawn is at that coordinate.
+ * TODO: before pushing it to possible, AND it with the attackWhite/Black
+ * map. Attack map gives 0 if an attack is possible and 1 if not.
  */
 std::vector<Square*> Validator::allowedPawn(Board *board, int r1, int c1) {
     Piece *piece = board->board[r1][c1]->piece;

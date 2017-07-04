@@ -17,6 +17,8 @@ class Validator {
         std::vector<Square*> allowedKnight(Board *board, int r1, int c1);
         std::vector<Square*> allowedQueen(Board *board, int r1, int c1);
         std::vector<Square*> allowedKing(Board *board, int r1, int c1);
+        std::vector<std::vector<Square*> > attackWhite; // possible attack positions of white pieces
+        std::vector<std::vector<Square*> > attackBlack; // possible attack positions of black pieces
 };
 
 #endif
