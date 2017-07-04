@@ -40,6 +40,12 @@ std::vector<Square*> Validator::allowed(Board *board, int r1, int c1) {
  */
 std::vector<Square*> Validator::allowedPawn(Board *board, int r1, int c1) {
     Piece *piece = board->board[r1][c1]->piece;
+    // Get possible squares
+    std::vector<Square*> possible;
+    /* if (piece->color == PieceColor::White) { */
+        
+    /* } */
+    // Return all squares which do not have a piece of same color on them
 }
 
 /**
