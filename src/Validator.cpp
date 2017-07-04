@@ -67,6 +67,258 @@ bool Validator::boundsCheck(int r1, int c1){
 
 
 /**
+ * Generates the requested possible moves of the Pawn, if the 
+ * path is reachable. Returns a vector of coordinates.
+ */
+
+std::vector<std::pair<int, int>> coordinates Validator::generatePawn(int r1, int c1, bool isBlack){
+    std::vector<std::pair<int, int>> coordinates;
+	PieceColor same = (isBlack) ? PieceColor::Black : PieceColor::White;
+    
+    if(this->boundsCheck(r1 + 1,c1 + 1)){
+		if(board->board[r1 + 1][c1 + 1]->piece->color != same){
+    		coordinates.push_back(std::make_pair(r1 + 1, c1 + 1));
+		}
+	}
+    if(this->boundsCheck(r1 + 1,c1 - 1)){
+		if(board->board[r1 + 1][c1 - 1]->piece->color != same){
+    		coordinates.push_back(std::make_pair(r1 + 1, c1 - 1));
+		}
+	}
+
+    if(this->boundsCheck(r1 + 1,c1)){
+		if(board->board[r1 + 2][c1]->piece->color != same){
+    		coordinates.push_back(std::make_pair(r1 + 1, c1));
+		}
+	}
+	return coordinates;
+}
+
+/**
+ * Generates the requested possible moves of the Knight, if the 
+ * path is reachable. Returns a vector of coordinates.
+ */
+
+std::vector<std::pair<int, int>> coordinates Validator::generateKnight(int r1, int c1, bool isBlack){
+    std::vector<std::pair<int, int>> coordinates;
+	PieceColor same = (isBlack) ? PieceColor::Black : PieceColor::White;
+
+    if(boundsCheck(r1 + 2, c1 - 1)){
+		if(board->board[r1 + 2][c1 - 1]->piece->color != same){
+    		coordinates.push_back(std::make_pair(r1 + 2, c1 - 1));
+		}
+	}
+	if(boundsCheck(r1 + 2,c1 + 1)){
+		if(board->board[r1 + 2][c1 + 1]->piece->color != same){
+    		coordinates.push_back(std::make_pair(r1 + 2, c1 + 1));
+		}
+	}
+	if(boundsCheck(r1 + 1,c1 + 2)){
+		if(board->board[r1 + 1][c1 + 2]->piece->color != same){
+    		coordinates.push_back(std::make_pair(r1 + 1, c1 + 2));
+		}
+	}
+	if(boundsCheck(r1 - 1,c1 + 2)){
+		if(board->board[r1 - 1][c1 + 2]->piece->color != same){
+    		coordinates.push_back(std::make_pair(r1 - 1, c1 + 2));
+		}
+	}
+	if(boundsCheck(r1 - 2,c1 + 1)){
+		if(board->board[r1 - 2][c1 + 1]->piece->color != same){
+    		coordinates.push_back(std::make_pair(r1 - 2, c1 + 1));
+		}
+	}
+	if(boundsCheck(r1 - 2,c1 - 1)){
+		if(board->board[r1 - 2][c1 - 1]->piece->color != same){
+    		coordinates.push_back(std::make_pair(r1 - 2, c1 - 1));
+		}
+    }
+    if(boundsCheck(r1 - 1,c1 - 2)){
+		if(board->board[r1 - 1][c1 - 2]->piece->color != same){
+    		coordinates.push_back(std::make_pair(r1 - 1, c1 - 2));
+		}
+	}
+	if(boundsCheck(r1 + 1,c1 - 2)){
+		if(board->board[r1 + 1][c1 - 2]->piece->color != same){
+    		coordinates.push_back(std::make_pair(r1 + 1, c1 - 2));
+		}
+	}
+	return coordinates;
+}
+
+/**
+ * Generates the requested possible moves of the Rook, if the 
+ * path is reachable. Returns a vector of coordinates.
+ */
+
+std::vector<std::pair<int, int>> coordinates Validator::generateRook(int r1, int c1, bool isBlack){
+    std::vector<std::pair<int, int>> coordinates;
+	PieceColor same = (isBlack) ? PieceColor::Black : PieceColor::White;
+
+	//Forward
+    for (int i=0; i<BOARD_SIZE-1; i++){
+    	if(boundsCheck(r1+i,c1)){
+			if(board->board[r1+i][c1]->piece->color != same){
+    			coordinates.push_back(std::make_pair(r1+i,c1))
+    		} else {
+    			break;
+    		}
+		}
+    }
+	//Reverse
+    for (int i=0; i<BOARD_SIZE-1; i++){
+    	if(boundsCheck(r1-i,c1)){
+			if(board->board[r1-i][c1]->piece->color != same){
+    			coordinates.push_back(std::make_pair(r1-i,c1))
+    		} else {
+    			break;
+    		}
+		}
+    }
+	//Left
+    for (int i=0; i<BOARD_SIZE-1; i++){
+    	if(boundsCheck(r1,c1-i)){
+			if(board->board[r1][c1-i]->piece->color != same){
+    			coordinates.push_back(std::make_pair(r1,c1-i))
+    		} else {
+    			break;
+    		}
+    	}
+    }
+	//Right
+    for (int i=0; i<BOARD_SIZE-1; i++){
+    	if(boundsCheck(r1,c1+i)){
+			if(board->board[r1][c1+i]->piece->color != same){
+    			coordinates.push_back(std::make_pair(r1,c1+i))
+    		} else {
+    			break;
+    		}
+		}
+    }
+	return coordinates;
+}
+
+/**
+ * Generates the requested possible moves of the Bishop, if the 
+ * path is reachable. Returns a vector of coordinates.
+ */
+
+std::vector<std::pair<int, int>> coordinates Validator::generateBishop(int r1, int c1, bool isBlack){
+    std::vector<std::pair<int, int>> coordinates;
+	PieceColor same = (isBlack) ? PieceColor::Black : PieceColor::White;
+
+	//Diagonal left fwd
+    for (int i=0; i<BOARD_SIZE-1; i++){
+    	if(boundsCheck(r1+i,c1+i)){
+			if(board->board[r1+i][c1+i]->piece->color != same){
+    			coordinates.push_back(std::make_pair(r1+i,c1+i))
+    		} else {
+    			break;
+    		}
+    	}
+    }
+	//Diagonal right reverse
+    for (int i=0; i<BOARD_SIZE-1; i++){
+    	if(boundsCheck(r1-i,c1+i)){
+			if(board->board[r1-i][c1+i]->piece->color != same){
+    			coordinates.push_back(std::make_pair(r1-i,c1+i))
+    		} else {
+    			break;
+    		}
+    	}
+    }
+	//Diagonal right fwd
+    for (int i=0; i<BOARD_SIZE-1; i++){
+    	if(boundsCheck(r1+i,c1-i)){
+			if(board->board[r1+i][c1-i]->piece->color != same){
+    			coordinates.push_back(std::make_pair(r1+i,c1-i))
+    		} else {
+    			break;
+    		}
+    	}
+    }
+	//Diagonal left rev
+    for (int i=0; i<BOARD_SIZE-1; i++){
+    	if(boundsCheck(r1-i,c1-i)){
+			if(board->board[r1+i][c1-i]->piece->color != same){
+    			coordinates.push_back(std::make_pair(r1-i,c1-i))
+    		} else {
+    			break;
+    		}
+    	}
+    }
+	return coordinates;
+}
+
+/**
+ * Generates the requested possible moves of the Queen, if the 
+ * path is reachable. Returns a vector of coordinates.
+ */
+
+std::vector<std::pair<int, int>> coordinates Validator::generateQueen(int r1, int c1, bool isBlack){
+    std::vector<std::pair<int, int> > coordinates = this->generateRook(r1,c1);
+	std::vector<std::pair<int, int> > coordinates2 = this->generateBishop(r1,c1);
+	
+	coordinates.reserve(coordinates2.size());
+	coordinates.insert(coordinates.end(),coordinates2.begin(),coordinates2.end());
+	coordinates2.clear();
+	
+	return coordinates;
+}
+
+/**
+ * Generates the requested possible moves of the King, if the 
+ * path is reachable. Returns a vector of coordinates.
+ */
+
+std::vector<std::pair<int, int>> coordinates Validator::generateKing(int r1, int c1, bool isBlack){
+    std::vector<std::pair<int, int>> coordinates;
+	PieceColor same = (isBlack) ? PieceColor::Black : PieceColor::White;
+
+    if(boundsCheck(r1 + 1, c1)){
+		if(board->board[r1 + 1][c1]->piece->color != same){
+    		coordinates.push_back(std::make_pair(r1 + 1, c1));
+		}
+	}
+	if(boundsCheck(r1 - 1,c1)){
+		if(board->board[r1 - 1][c1]->piece->color != same){
+    		coordinates.push_back(std::make_pair(r1 - 1, c1));
+		}
+	}
+	if(boundsCheck(r1 + 1,c1 + 1)){
+		if(board->board[r1 + 1][c1 + 1]->piece->color != same){
+    		coordinates.push_back(std::make_pair(r1 + 1, c1 + 1));
+		}
+	}
+	if(boundsCheck(r1 - 1,c1 + 1)){
+		if(board->board[r1 - 1][c1 + 1]->piece->color != same){
+    		coordinates.push_back(std::make_pair(r1 - 1, c1 + 1));
+		}
+	}
+	if(boundsCheck(r1 + 1,c1 - 1)){
+		if(board->board[r1 + 1][c1 - 1]->piece->color != same){
+    		coordinates.push_back(std::make_pair(r1 + 1, c1 - 1));
+		}
+	}
+	if(boundsCheck(r1 - 1,c1 - 1)){
+		if(board->board[r1 - 1][c1 - 1]->piece->color != same){
+    		coordinates.push_back(std::make_pair(r1 - 1, c1 - 1));
+		}
+    }
+    if(boundsCheck(r1,c1 + 1)){
+		if(board->board[r1][c1 + 1]->piece->color != same){
+    		coordinates.push_back(std::make_pair(r1, c1 + 1));
+		}
+	}
+	if(boundsCheck(r1,c1 - 1)){
+		if(board->board[r1][c1 - 1]->piece->color != same){
+    		coordinates.push_back(std::make_pair(r1, c1 - 1));
+		}
+	}
+	return coordinates;
+}
+
+/**
  * Populates an attack map for a particular turn (color), given the current state of the
  * board and stores it in a 2D array called attackBlack/White corresponding to the turn.
  */
@@ -75,84 +327,92 @@ void Validator::populateAttackMap(Board *board){
 	for (int row=0; row<BOARD_SIZE; row++){
 		for (int col=0; col<BOARD_SIZE; col++){
 			Piece *piece = board->board[row][col]->piece;
-			switch (piece->type){
-				case PieceType::Pawn:
-					if(board->turn == PieceColor::Black) {
-						this->populateAttackMapPawn(board, row, col, 1);
-					} else {
-						this->populateAttackMapPawn(board, row, col, 0);
-					}
-				case PieceType::Rook:
-					if(board->turn == PieceColor::Black) {
-						this->populateAttackMapRook(board, row, col, 1);
-					} else {
-						this->populateAttackMapRook(board, row, col, 0);
-					}
-				case PieceType::Bishop:
-					if(board->turn == PieceColor::Black) {
-						this->populateAttackMapBishop(board, row, col, 1);
-					} else {
-						this->populateAttackMapBishop(board, row, col, 0);
-					}
-				case PieceType::Queen:
-					if(board->turn == PieceColor::Black) {
-						this->populateAttackMapQueen(board, row, col, 1);
-					} else {
-						this->populateAttackMapQueen(board, row, col, 0);
-					}
-				case PieceType::King:
-					if(board->turn == PieceColor::Black) {
-						this->populateAttackMapKing(board, row, col, 1);
-					} else {
-						this->populateAttackMapKing(board, row, col, 0);
-					}
-				case default:
-					return;
+			
+			//Populate only for pieces which are opposite to whose turn it is.
+			if(board->turn != piece->color) {
+				switch (piece->type){
+					case PieceType::Pawn:
+						if(board->turn == PieceColor::Black) {
+							this->populateAttackMapPawn(board, row, col, 1);
+						} else {
+							this->populateAttackMapPawn(board, row, col, 0);
+						}
+					case PieceType::Rook:
+						if(board->turn == PieceColor::Black) {
+							this->populateAttackMapRook(board, row, col, 1);
+						} else {
+							this->populateAttackMapRook(board, row, col, 0);
+						}
+					case PieceType::Bishop:
+						if(board->turn == PieceColor::Black) {
+							this->populateAttackMapBishop(board, row, col, 1);
+						} else {
+							this->populateAttackMapBishop(board, row, col, 0);
+						}
+					case PieceType::Queen:
+						if(board->turn == PieceColor::Black) {
+							this->populateAttackMapQueen(board, row, col, 1);
+						} else {
+							this->populateAttackMapQueen(board, row, col, 0);
+						}
+					case PieceType::King:
+						if(board->turn == PieceColor::Black) {
+							this->populateAttackMapKing(board, row, col, 1);
+						} else {
+							this->populateAttackMapKing(board, row, col, 0);
+						}
+					case default:
+						return;
+				}
 			}
+		}
+	}
+
+	return;
+}
+
+void Validator::doPopulate(const std::vector<std::pair<int, int> >& coordinates, bool isBlack){
+	for (int i=0; i<coordinates.size(); i++){
+		int row = coordinates[i].first;
+		int col = coordinates[i].second;
+		if(isBlack){
+			this->attackWhite[row][col] = 0;
+		} else {
+			this->attackBlack[row][col] = 0;
 		}
 	}
 	return;
 }
 
 void Validator::populateAttackMapPawn(Board *board, int r1, int c1, bool isBlack){
-    
-    std::vector<std::pair<int, int>> coordinates;
-    if(this->boundsCheck(r1+1,c1)){
-    	coordinates.push_back(std::make_pair(r1 + 1, c1));
-	}
-    if(this->boundsCheck(r1+1,c1-1)){
-    	coordinates.push_back(std::make_pair(r1 + 1, c1-1));
-	}
-	
-	for (int i=0; i<coordinates.size(); i++){
-		int row = coordinates[i].first;
-		int col = coordinates[i].second;
-    	PieceColor opposite = (isBlack) ? PieceColor::White : PieceColor::Black;
-		if((board->board[row][col]->piece->type != PieceType::None) && (board->board[row][col]->piece->color == opposite)){
-			if(isBlack){
-				this->attackWhite[row][col] = 0;
-			} else {
-				this->attackBlack[row][col] = 0;
-			}
-		} 
-	}
-
+	std::vector<std::pair<int, int> > coordinates = this->generatePawn(r1,c1,isBlack);
+	//special case for pawn as it cannot attack in the forward direction
+	coordinates.pop_back(); 
+	this->doPopulate(coordinates, isBlack);
 	return;
 }
 
 void Validator::populateAttackMapRook(Board *board, int r1, int c1, bool isBlack){
+	std::vector<std::pair<int, int> > coordinates = this->generateRook(r1,c1,isBlack);
+	this->doPopulate(coordinates, isBlack);
 	return;
 }
 
 void Validator::populateAttackMapBishop(Board *board, int r1, int c1, bool isBlack){
+	std::vector<std::pair<int, int> > coordinates = this->generateBishop(r1,c1,isBlack);
+	this->doPopulate(coordinates, isBlack);
 	return;
 }
 
 void Validator::populateAttackMapQueen(Board *board, int r1, int c1, bool isBlack){
+	std::vector<std::pair<int, int> > coordinates = this->generateQueen(r1,c1,isBlack);
+	this->doPopulate(coordinates, isBlack);
 	return;
 }
 
 void Validator::populateAttackMapKing(Board *board, int r1, int c1, bool isBlack){
+	std::vector<std::pair<int, int> > coordinates = this->generateKing(r1,c1,isBlack);
+	this->doPopulate(coordinates, isBlack);
 	return;
 }
 
@@ -264,15 +524,7 @@ std::vector<Square*> Validator::allowedKnight(Board *board, int r1, int c1) {
     std::vector<Square*> possible;
     PieceColor color = board->board[r1][c1]->piece->color;
     PieceColor opposite = (color == PieceColor::White) ? PieceColor::Black : PieceColor::White;
-    std::vector<std::pair<int, int>> coordinates;
-    coordinates.push_back(std::make_pair(r1 + 2, c1 - 1));
-    coordinates.push_back(std::make_pair(r1 + 2, c1 + 1));
-    coordinates.push_back(std::make_pair(r1 + 1, c1 + 2));
-    coordinates.push_back(std::make_pair(r1 - 1, c1 + 2));
-    coordinates.push_back(std::make_pair(r1 - 2, c1 + 1));
-    coordinates.push_back(std::make_pair(r1 - 2, c1 - 1));
-    coordinates.push_back(std::make_pair(r1 - 1, c1 - 2));
-    coordinates.push_back(std::make_pair(r1 + 1, c1 - 2));
+    std::vector<std::pair<int, int> > coordinates = this->generateKnight(r1,c1);
     for (int i = 0; i < coordinates.size(); i++) {
         int row = coordinates[i].first;
         int col = coordinates[i].second;
