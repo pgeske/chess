@@ -85,7 +85,6 @@ std::vector<std::pair<int, int>> coordinates Validator::generatePawn(int r1, int
     		coordinates.push_back(std::make_pair(r1 + 1, c1 - 1));
 		}
 	}
-
     if(this->boundsCheck(r1 + 1,c1)){
 		if(board->board[r1 + 2][c1]->piece->color != same){
     		coordinates.push_back(std::make_pair(r1 + 1, c1));
@@ -157,9 +156,9 @@ std::vector<std::pair<int, int>> coordinates Validator::generateRook(int r1, int
 
 	//Forward
     for (int i=0; i<BOARD_SIZE-1; i++){
-    	if(boundsCheck(r1+i,c1)){
-			if(board->board[r1+i][c1]->piece->color != same){
-    			coordinates.push_back(std::make_pair(r1+i,c1))
+    	if(boundsCheck(r1 + i,c1)){
+			if(board->board[r1 + i][c1]->piece->color != same){
+    			coordinates.push_back(std::make_pair(r1 + i,c1))
     		} else {
     			break;
     		}
@@ -167,9 +166,9 @@ std::vector<std::pair<int, int>> coordinates Validator::generateRook(int r1, int
     }
 	//Reverse
     for (int i=0; i<BOARD_SIZE-1; i++){
-    	if(boundsCheck(r1-i,c1)){
-			if(board->board[r1-i][c1]->piece->color != same){
-    			coordinates.push_back(std::make_pair(r1-i,c1))
+    	if(boundsCheck(r1 - i,c1)){
+			if(board->board[r1 - i][c1]->piece->color != same){
+    			coordinates.push_back(std::make_pair(r1 - i,c1))
     		} else {
     			break;
     		}
@@ -177,9 +176,9 @@ std::vector<std::pair<int, int>> coordinates Validator::generateRook(int r1, int
     }
 	//Left
     for (int i=0; i<BOARD_SIZE-1; i++){
-    	if(boundsCheck(r1,c1-i)){
-			if(board->board[r1][c1-i]->piece->color != same){
-    			coordinates.push_back(std::make_pair(r1,c1-i))
+    	if(boundsCheck(r1,c1 - i)){
+			if(board->board[r1][c1 - i]->piece->color != same){
+    			coordinates.push_back(std::make_pair(r1,c1 - i))
     		} else {
     			break;
     		}
@@ -187,9 +186,9 @@ std::vector<std::pair<int, int>> coordinates Validator::generateRook(int r1, int
     }
 	//Right
     for (int i=0; i<BOARD_SIZE-1; i++){
-    	if(boundsCheck(r1,c1+i)){
-			if(board->board[r1][c1+i]->piece->color != same){
-    			coordinates.push_back(std::make_pair(r1,c1+i))
+    	if(boundsCheck(r1,c1 + i)){
+			if(board->board[r1][c1 + i]->piece->color != same){
+    			coordinates.push_back(std::make_pair(r1,c1 + i))
     		} else {
     			break;
     		}
@@ -209,9 +208,9 @@ std::vector<std::pair<int, int>> coordinates Validator::generateBishop(int r1, i
 
 	//Diagonal left fwd
     for (int i=0; i<BOARD_SIZE-1; i++){
-    	if(boundsCheck(r1+i,c1+i)){
+    	if(boundsCheck(r1 + i,c1 + i)){
 			if(board->board[r1+i][c1+i]->piece->color != same){
-    			coordinates.push_back(std::make_pair(r1+i,c1+i))
+    			coordinates.push_back(std::make_pair(r1 + i,c1 + i))
     		} else {
     			break;
     		}
@@ -219,9 +218,9 @@ std::vector<std::pair<int, int>> coordinates Validator::generateBishop(int r1, i
     }
 	//Diagonal right reverse
     for (int i=0; i<BOARD_SIZE-1; i++){
-    	if(boundsCheck(r1-i,c1+i)){
-			if(board->board[r1-i][c1+i]->piece->color != same){
-    			coordinates.push_back(std::make_pair(r1-i,c1+i))
+    	if(boundsCheck(r1 - i,c1 + i)){
+			if(board->board[r1 - i][c1 + i]->piece->color != same){
+    			coordinates.push_back(std::make_pair(r1 - i,c1 + i))
     		} else {
     			break;
     		}
@@ -229,9 +228,9 @@ std::vector<std::pair<int, int>> coordinates Validator::generateBishop(int r1, i
     }
 	//Diagonal right fwd
     for (int i=0; i<BOARD_SIZE-1; i++){
-    	if(boundsCheck(r1+i,c1-i)){
+    	if(boundsCheck(r1 + i,c1 - i)){
 			if(board->board[r1+i][c1-i]->piece->color != same){
-    			coordinates.push_back(std::make_pair(r1+i,c1-i))
+    			coordinates.push_back(std::make_pair(r1 + i,c1 - i))
     		} else {
     			break;
     		}
@@ -239,9 +238,9 @@ std::vector<std::pair<int, int>> coordinates Validator::generateBishop(int r1, i
     }
 	//Diagonal left rev
     for (int i=0; i<BOARD_SIZE-1; i++){
-    	if(boundsCheck(r1-i,c1-i)){
-			if(board->board[r1+i][c1-i]->piece->color != same){
-    			coordinates.push_back(std::make_pair(r1-i,c1-i))
+    	if(boundsCheck(r1 - i,c1 - i)){
+			if(board->board[r1 + i][c1 - i]->piece->color != same){
+    			coordinates.push_back(std::make_pair(r1 - i,c1 - i))
     		} else {
     			break;
     		}
