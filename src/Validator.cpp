@@ -204,7 +204,7 @@ std::vector<Square*> Validator::allowedKnight(Board *board, int r1, int c1) {
     for (int i = 0; i < coordinates.size(); i++) {
         int row = coordinates[i].first;
         int col = coordinates[i].second;
-        if (board->board[row][col]->color == color) continue;
+        if (board->board[row][col]->piece->color == color) continue;
         if (row < 0 || row > BOARD_SIZE || col < 0 || col > BOARD_SIZE) continue;
         possible.push_back(board->board[row][col]);
     }
