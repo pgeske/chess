@@ -1,3 +1,4 @@
+#include "Board.h"
 #include "Validator.h"
 
 /**
@@ -40,12 +41,36 @@ std::vector<Square*> Validator::allowed(Board *board, int r1, int c1) {
  */
 std::vector<Square*> Validator::allowedPawn(Board *board, int r1, int c1) {
     Piece *piece = board->board[r1][c1]->piece;
-    // Get possible squares
     std::vector<Square*> possible;
-    /* if (piece->color == PieceColor::White) { */
-        
-    /* } */
-    // Return all squares which do not have a piece of same color on them
+    if (piece->color == PieceColor::White) {
+        if (r1 < BOARD_SIZE) {
+            if (board->board[r1 + 1][c1]->piece->color != PieceColor::White) {
+                possible.push_back(board->board[r1 + 1][c1]);
+            }
+        } else if (c1 > 0) {
+            if (board->board[r1 + 1][c1 - 1]->piece->color == PieceColor::Black) {
+                possible.push_back(board->board[r1 + 1][c1 - 1]);
+            }
+        } else if (c1 < BOARD_SIZE) {
+            if (board->board[r1 + 1][c1 + 1]->piece->color == PieceColor::Black) {
+                possible.push_back(board->board[r1 + 1][c1 + 1]);
+            }
+        } 
+    } else if (piece->color == PieceColor::Black) {
+        if (r1 > 0) {
+            if (board->board[r1 - 1][c1]->piece->color != PieceColor::Black) {
+                possible.push_back(board->board[r1 - 1][c1]);
+            }
+        } else if (c1 > 0) {
+            if (board->board[r1 - 1][c1 - 1]->piece->color == PieceColor::White) {
+                possible.push_back(board->board[r1 - 1][c1 - 1]);
+            }
+        } else if (c1 < BOARD_SIZE) {
+            if (board->board[r1 - 1][c1 + 1]->piece->color == PieceColor::White) {
+                possible.push_back(board->board[r1 - 1][c1 + 1]);
+            }
+        } 
+    }
 }
 
 /**
