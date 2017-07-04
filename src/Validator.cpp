@@ -189,8 +189,8 @@ std::vector<Square*> Validator::allowedRook(Board *board, int r1, int c1) {
  * Like Validator::allowed, but assumes Knight is at that coordinate.
  */
 std::vector<Square*> Validator::allowedKnight(Board *board, int r1, int c1) {
-    vector<Square*> possible;
-    PieceColor color = board->board[r1][c1]->color;
+    std::vector<Square*> possible;
+    PieceColor color = board->board[r1][c1]->piece->color;
     PieceColor opposite = (color == PieceColor::White) ? PieceColor::Black : PieceColor::White;
     std::vector<std::pair<int, int>> coordinates;
     coordinates.push_back(std::make_pair(r1 + 2, c1 - 1));
