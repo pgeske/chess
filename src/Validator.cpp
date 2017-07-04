@@ -1,6 +1,53 @@
 #include "Board.h"
 #include "Validator.h"
 
+Validator::Validator() {
+    this->initialize();
+    return;
+}
+
+Validator::~Validator() {
+    this->clear();
+    return;
+}
+
+/**
+ * Deletes every square in both the attack maps.
+ */
+void Validator::clear() {
+    for (int i = 0; i < BOARD_SIZE; i++) {
+        this->attackBlack[i].clear();
+    }
+    this->attackBlack.clear();
+    for (int i = 0; i < BOARD_SIZE; i++) {
+        this->attackWhite[i].clear();
+    }
+    this->attackWhite.clear();
+    return;
+}
+
+/**
+ * Sets the attack maps for each color to a 8 x 8 board with empty Squares.
+ * 
+ */
+void Validator::initialize() {
+    this->attackBlack = std::vector< std::vector<Square*> >();
+    this->attackWhite = std::vector< std::vector<Square*> >();
+    for (int i = 0; i < BOARD_SIZE; i++) {
+        this->attackWhite.push_back(std::vector<Square*>());
+        for (int j = 0; j < BOARD_SIZE; j++) {
+            this->attackWhite[i].push_back(new Square());
+        }
+    }
+    for (int i = 0; i < BOARD_SIZE; i++) {
+        this->attackBlack.push_back(std::vector<Square*>());
+        for (int j = 0; j < BOARD_SIZE; j++) {
+            this->attackBlack[i].push_back(new Square());
+        }
+    }
+    return;
+}
+
 /**
  * Returns true if move on board->board[r1][c1] to board->board[r2][c2]
  * is valid. Otherwise, false.
@@ -9,6 +56,10 @@ bool Validator::validate(Board *board, int r1, int c1, int r2, int c2) {
     return true;
 }
 
+/**
+ * Populates an attack map for a particular turn (color), given the current state of the
+ * board and stores it in a 2D array called attackBlack/White corresponding to the turn.
+ */
 void Validator::populateAttackMap(Board *board){
 	return;
 }
