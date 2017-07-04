@@ -13,12 +13,21 @@ class Validator {
     private:
         void initialize();
         void clear();
-        void populateAttackMap(Board *board);
-        void populateAttackMapPawn(Board*, int, int);
-        void populateAttackMapRook(Board*, int, int);
-        void populateAttackMapBishop(Board*, int, int);
-        void populateAttackMapQueen(Board*, int, int);
-        void populateAttackMapKing(Board*, int, int);
+		std::vector<std::pair<int, int> > generatePawn(const Board *board, int r1, int c1, bool isBlack);
+		std::vector<std::pair<int, int> > generateRook(const Board *board, int r1, int c1, bool isBlack);
+		std::vector<std::pair<int, int> > generateBishop(const Board *board, int r1, int c1, bool isBlack);
+		std::vector<std::pair<int, int> > generateKnight(const Board *board, int r1, int c1, bool isBlack);
+		std::vector<std::pair<int, int> > generateQueen(const Board *board, int r1, int c1, bool isBlack);
+		std::vector<std::pair<int, int> > generateKing(const Board *board, int r1, int c1, bool isBlack);
+        void populateAttackMap(const Board *board);
+		void populateAttackMapPawn(const Board *board, int r1, int c1, bool isBlack);
+		void populateAttackMapRook(const Board *board, int r1, int c1, bool isBlack);
+		void populateAttackMapBishop(const Board *board, int r1, int c1, bool isBlack);
+		void populateAttackMapKnight(const Board *board, int r1, int c1, bool isBlack);
+		void populateAttackMapQueen(const Board *board, int r1, int c1, bool isBlack);
+		void populateAttackMapKing(const Board *board, int r1, int c1, bool isBlack);
+		void doPopulate(const std::vector<std::pair<int, int> >& coordinates, bool isBlack);
+		bool boundsCheck(int r1, int c1);
         std::vector<Square*> allowedPawn(Board *board, int r1, int c1);
         std::vector<Square*> allowedRook(Board *board, int r1, int c1);
         std::vector<Square*> allowedBishop(Board *board, int r1, int c1);
