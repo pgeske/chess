@@ -50,8 +50,8 @@ bool Validator::validate(Board *board, int r1, int c1, int r2, int c2) {
 }
 
 
-bool Validator::boundsCheck(int r1, int c1){
-    if(r1>=0 && r1<BOARD_SIZE && c1>=0 && c1<BOARD_SIZE){
+bool Validator::boundsCheck(int r1, int c1) {
+    if(r1>=0 && r1<BOARD_SIZE && c1>=0 && c1<BOARD_SIZE) {
         return 1;
     } else {
         return 0;
@@ -116,23 +116,23 @@ std::vector<std::pair<int, int> > Validator::generate(const Board *board, int r1
  * path is reachable. Returns a vector of coordinates.
  */
 
-std::vector<std::pair<int, int> > Validator::generatePawn(const Board* board, int r1, int c1, bool isBlack){
+std::vector<std::pair<int, int> > Validator::generatePawn(const Board* board, int r1, int c1, bool isBlack) {
     std::vector<std::pair<int, int> > coordinates;
     PieceColor same = (isBlack) ? PieceColor::Black : PieceColor::White;
     PieceColor opposite = (isBlack) ? PieceColor::White : PieceColor::Black;
     int direction = isBlack ? 1 : -1;
     if (Validator::boundsCheck(r1 + direction, c1 + 1)) {
-        if(board->board[r1 + direction][c1 + 1]->piece->color == opposite){
+        if(board->board[r1 + direction][c1 + 1]->piece->color == opposite) {
             coordinates.push_back(std::make_pair(r1 + direction, c1 + 1));
         }
     }
-    if(Validator::boundsCheck(r1 + direction, c1 - 1)){
-        if(board->board[r1 + direction][c1 - 1]->piece->color == opposite){
+    if(Validator::boundsCheck(r1 + direction, c1 - 1)) {
+        if(board->board[r1 + direction][c1 - 1]->piece->color == opposite) {
             coordinates.push_back(std::make_pair(r1 + direction, c1 - 1));
         }
     }
-    if(Validator::boundsCheck(r1 + direction,c1)){
-        if(board->board[r1 + direction][c1]->piece->color != same){
+    if(Validator::boundsCheck(r1 + direction, c1)) {
+        if(board->board[r1 + direction][c1]->piece->color != same) {
             coordinates.push_back(std::make_pair(r1 + direction, c1));
         }
     }
@@ -154,47 +154,47 @@ std::vector<std::pair<int, int> > Validator::generatePawn(const Board* board, in
  * path is reachable. Returns a vector of coordinates.
  */
 
-std::vector<std::pair<int, int> > Validator::generateKnight(const Board* board, int r1, int c1, bool isBlack){
+std::vector<std::pair<int, int> > Validator::generateKnight(const Board* board, int r1, int c1, bool isBlack) {
     std::vector<std::pair<int, int> > coordinates;
     PieceColor same = (isBlack) ? PieceColor::Black : PieceColor::White;
 
-    if(Validator::boundsCheck(r1 + 2, c1 - 1)){
-        if(board->board[r1 + 2][c1 - 1]->piece->color != same){
+    if(Validator::boundsCheck(r1 + 2, c1 - 1)) {
+        if(board->board[r1 + 2][c1 - 1]->piece->color != same) {
             coordinates.push_back(std::make_pair(r1 + 2, c1 - 1));
         }
     }
-    if(Validator::boundsCheck(r1 + 2,c1 + 1)){
-        if(board->board[r1 + 2][c1 + 1]->piece->color != same){
+    if(Validator::boundsCheck(r1 + 2, c1 + 1)) {
+        if(board->board[r1 + 2][c1 + 1]->piece->color != same) {
             coordinates.push_back(std::make_pair(r1 + 2, c1 + 1));
         }
     }
-    if(Validator::boundsCheck(r1 + 1,c1 + 2)){
-        if(board->board[r1 + 1][c1 + 2]->piece->color != same){
+    if(Validator::boundsCheck(r1 + 1, c1 + 2)) {
+        if(board->board[r1 + 1][c1 + 2]->piece->color != same) {
             coordinates.push_back(std::make_pair(r1 + 1, c1 + 2));
         }
     }
-    if(Validator::boundsCheck(r1 - 1,c1 + 2)){
-        if(board->board[r1 - 1][c1 + 2]->piece->color != same){
+    if(Validator::boundsCheck(r1 - 1, c1 + 2)) {
+        if(board->board[r1 - 1][c1 + 2]->piece->color != same) {
             coordinates.push_back(std::make_pair(r1 - 1, c1 + 2));
         }
     }
-    if(Validator::boundsCheck(r1 - 2,c1 + 1)){
-        if(board->board[r1 - 2][c1 + 1]->piece->color != same){
+    if(Validator::boundsCheck(r1 - 2, c1 + 1)) {
+        if(board->board[r1 - 2][c1 + 1]->piece->color != same) {
             coordinates.push_back(std::make_pair(r1 - 2, c1 + 1));
         }
     }
-    if(Validator::boundsCheck(r1 - 2,c1 - 1)){
-        if(board->board[r1 - 2][c1 - 1]->piece->color != same){
+    if(Validator::boundsCheck(r1 - 2, c1 - 1)) {
+        if(board->board[r1 - 2][c1 - 1]->piece->color != same) {
             coordinates.push_back(std::make_pair(r1 - 2, c1 - 1));
         }
     }
-    if(Validator::boundsCheck(r1 - 1,c1 - 2)){
-        if(board->board[r1 - 1][c1 - 2]->piece->color != same){
+    if(Validator::boundsCheck(r1 - 1, c1 - 2)) {
+        if(board->board[r1 - 1][c1 - 2]->piece->color != same) {
             coordinates.push_back(std::make_pair(r1 - 1, c1 - 2));
         }
     }
-    if(Validator::boundsCheck(r1 + 1,c1 - 2)){
-        if(board->board[r1 + 1][c1 - 2]->piece->color != same){
+    if(Validator::boundsCheck(r1 + 1, c1 - 2)) {
+        if(board->board[r1 + 1][c1 - 2]->piece->color != same) {
             coordinates.push_back(std::make_pair(r1 + 1, c1 - 2));
         }
     }
@@ -206,45 +206,45 @@ std::vector<std::pair<int, int> > Validator::generateKnight(const Board* board, 
  * path is reachable. Returns a vector of coordinates.
  */
 
-std::vector<std::pair<int, int> > Validator::generateRook(const Board* board, int r1, int c1, bool isBlack){
+std::vector<std::pair<int, int> > Validator::generateRook(const Board* board, int r1, int c1, bool isBlack) {
     std::vector<std::pair<int, int> > coordinates;
     PieceColor same = (isBlack) ? PieceColor::Black : PieceColor::White;
 
     //Forward
-    for (int i=0; i<BOARD_SIZE-1; i++){
-        if(Validator::boundsCheck(r1 + i,c1)){
-            if(board->board[r1 + i][c1]->piece->color != same){
-                coordinates.push_back(std::make_pair(r1 + i,c1));
+    for (int i=0; i<BOARD_SIZE-1; i++) {
+        if(Validator::boundsCheck(r1 + i, c1)) {
+            if(board->board[r1 + i][c1]->piece->color != same) {
+                coordinates.push_back(std::make_pair(r1 + i, c1));
             } else {
                 break;
             }
         }
     }
     //Reverse
-    for (int i=0; i<BOARD_SIZE-1; i++){
-        if(Validator::boundsCheck(r1 - i,c1)){
-            if(board->board[r1 - i][c1]->piece->color != same){
-                coordinates.push_back(std::make_pair(r1 - i,c1));
+    for (int i=0; i<BOARD_SIZE-1; i++) {
+        if(Validator::boundsCheck(r1 - i, c1)) {
+            if(board->board[r1 - i][c1]->piece->color != same) {
+                coordinates.push_back(std::make_pair(r1 - i, c1));
             } else {
                 break;
             }
         }
     }
     //Left
-    for (int i=0; i<BOARD_SIZE-1; i++){
-        if(Validator::boundsCheck(r1,c1 - i)){
-            if(board->board[r1][c1 - i]->piece->color != same){
-                coordinates.push_back(std::make_pair(r1,c1 - i));
+    for (int i=0; i<BOARD_SIZE-1; i++) {
+        if(Validator::boundsCheck(r1, c1 - i)) {
+            if(board->board[r1][c1 - i]->piece->color != same) {
+                coordinates.push_back(std::make_pair(r1, c1 - i));
             } else {
                 break;
             }
         }
     }
     //Right
-    for (int i=0; i<BOARD_SIZE-1; i++){
-        if(Validator::boundsCheck(r1,c1 + i)){
-            if(board->board[r1][c1 + i]->piece->color != same){
-                coordinates.push_back(std::make_pair(r1,c1 + i));
+    for (int i=0; i<BOARD_SIZE-1; i++) {
+        if(Validator::boundsCheck(r1, c1 + i)) {
+            if(board->board[r1][c1 + i]->piece->color != same) {
+                coordinates.push_back(std::make_pair(r1, c1 + i));
             } else {
                 break;
             }
@@ -258,45 +258,45 @@ std::vector<std::pair<int, int> > Validator::generateRook(const Board* board, in
  * path is reachable. Returns a vector of coordinates.
  */
 
-std::vector<std::pair<int, int> > Validator::generateBishop(const Board *board, int r1, int c1, bool isBlack){
+std::vector<std::pair<int, int> > Validator::generateBishop(const Board *board, int r1, int c1, bool isBlack) {
     std::vector<std::pair<int, int> > coordinates;
     PieceColor same = (isBlack) ? PieceColor::Black : PieceColor::White;
 
     //Diagonal left fwd
-    for (int i=0; i<BOARD_SIZE-1; i++){
-        if(Validator::boundsCheck(r1 + i,c1 + i)){
-            if(board->board[r1+i][c1+i]->piece->color != same){
-                coordinates.push_back(std::make_pair(r1 + i,c1 + i));
+    for (int i=0; i<BOARD_SIZE-1; i++) {
+        if(Validator::boundsCheck(r1 + i, c1 + i)) {
+            if(board->board[r1+i][c1+i]->piece->color != same) {
+                coordinates.push_back(std::make_pair(r1 + i, c1 + i));
             } else {
                 break;
             }
         }
     }
     //Diagonal right reverse
-    for (int i=0; i<BOARD_SIZE-1; i++){
-        if(Validator::boundsCheck(r1 - i,c1 + i)){
-            if(board->board[r1 - i][c1 + i]->piece->color != same){
-                coordinates.push_back(std::make_pair(r1 - i,c1 + i));
+    for (int i=0; i<BOARD_SIZE-1; i++) {
+        if(Validator::boundsCheck(r1 - i, c1 + i)) {
+            if(board->board[r1 - i][c1 + i]->piece->color != same) {
+                coordinates.push_back(std::make_pair(r1 - i, c1 + i));
             } else {
                 break;
             }
         }
     }
     //Diagonal right fwd
-    for (int i=0; i<BOARD_SIZE-1; i++){
-        if(Validator::boundsCheck(r1 + i,c1 - i)){
-            if(board->board[r1+i][c1-i]->piece->color != same){
-                coordinates.push_back(std::make_pair(r1 + i,c1 - i));
+    for (int i=0; i<BOARD_SIZE-1; i++) {
+        if(Validator::boundsCheck(r1 + i, c1 - i)) {
+            if(board->board[r1+i][c1-i]->piece->color != same) {
+                coordinates.push_back(std::make_pair(r1 + i, c1 - i));
             } else {
                 break;
             }
         }
     }
     //Diagonal left rev
-    for (int i=0; i<BOARD_SIZE-1; i++){
-        if(Validator::boundsCheck(r1 - i,c1 - i)){
-            if(board->board[r1 + i][c1 - i]->piece->color != same){
-                coordinates.push_back(std::make_pair(r1 - i,c1 - i));
+    for (int i=0; i<BOARD_SIZE-1; i++) {
+        if(Validator::boundsCheck(r1 - i, c1 - i)) {
+            if(board->board[r1 + i][c1 - i]->piece->color != same) {
+                coordinates.push_back(std::make_pair(r1 - i, c1 - i));
             } else {
                 break;
             }
@@ -310,12 +310,12 @@ std::vector<std::pair<int, int> > Validator::generateBishop(const Board *board, 
  * path is reachable. Returns a vector of coordinates.
  */
 
-std::vector<std::pair<int, int> > Validator::generateQueen(const Board *board, int r1, int c1, bool isBlack){
-    std::vector<std::pair<int, int> > coordinates = Validator::generateRook(board, r1,c1, isBlack);
-    std::vector<std::pair<int, int> > coordinates2 = Validator::generateBishop(board, r1,c1, isBlack);
+std::vector<std::pair<int, int> > Validator::generateQueen(const Board *board, int r1, int c1, bool isBlack) {
+    std::vector<std::pair<int, int> > coordinates = Validator::generateRook(board, r1, c1, isBlack);
+    std::vector<std::pair<int, int> > coordinates2 = Validator::generateBishop(board, r1, c1, isBlack);
 
     coordinates.reserve(coordinates2.size());
-    coordinates.insert(coordinates.end(),coordinates2.begin(),coordinates2.end());
+    coordinates.insert(coordinates.end(), coordinates2.begin(), coordinates2.end());
     coordinates2.clear();
 
     return coordinates;
@@ -326,47 +326,47 @@ std::vector<std::pair<int, int> > Validator::generateQueen(const Board *board, i
  * path is reachable. Returns a vector of coordinates.
  */
 
-std::vector<std::pair<int, int> > Validator::generateKing(const Board *board, int r1, int c1, bool isBlack){
+std::vector<std::pair<int, int> > Validator::generateKing(const Board *board, int r1, int c1, bool isBlack) {
     std::vector<std::pair<int, int> > coordinates;
     PieceColor same = (isBlack) ? PieceColor::Black : PieceColor::White;
 
-    if(Validator::boundsCheck(r1 + 1, c1)){
-        if(board->board[r1 + 1][c1]->piece->color != same){
+    if(Validator::boundsCheck(r1 + 1, c1)) {
+        if(board->board[r1 + 1][c1]->piece->color != same) {
             coordinates.push_back(std::make_pair(r1 + 1, c1));
         }
     }
-    if(Validator::boundsCheck(r1 - 1,c1)){
-        if(board->board[r1 - 1][c1]->piece->color != same){
+    if(Validator::boundsCheck(r1 - 1, c1)) {
+        if(board->board[r1 - 1][c1]->piece->color != same) {
             coordinates.push_back(std::make_pair(r1 - 1, c1));
         }
     }
-    if(Validator::boundsCheck(r1 + 1,c1 + 1)){
-        if(board->board[r1 + 1][c1 + 1]->piece->color != same){
+    if(Validator::boundsCheck(r1 + 1, c1 + 1)) {
+        if(board->board[r1 + 1][c1 + 1]->piece->color != same) {
             coordinates.push_back(std::make_pair(r1 + 1, c1 + 1));
         }
     }
-    if(Validator::boundsCheck(r1 - 1,c1 + 1)){
-        if(board->board[r1 - 1][c1 + 1]->piece->color != same){
+    if(Validator::boundsCheck(r1 - 1, c1 + 1)) {
+        if(board->board[r1 - 1][c1 + 1]->piece->color != same) {
             coordinates.push_back(std::make_pair(r1 - 1, c1 + 1));
         }
     }
-    if(Validator::boundsCheck(r1 + 1,c1 - 1)){
-        if(board->board[r1 + 1][c1 - 1]->piece->color != same){
+    if(Validator::boundsCheck(r1 + 1, c1 - 1)) {
+        if(board->board[r1 + 1][c1 - 1]->piece->color != same) {
             coordinates.push_back(std::make_pair(r1 + 1, c1 - 1));
         }
     }
-    if(Validator::boundsCheck(r1 - 1,c1 - 1)){
-        if(board->board[r1 - 1][c1 - 1]->piece->color != same){
+    if(Validator::boundsCheck(r1 - 1, c1 - 1)) {
+        if(board->board[r1 - 1][c1 - 1]->piece->color != same) {
             coordinates.push_back(std::make_pair(r1 - 1, c1 - 1));
         }
     }
-    if(Validator::boundsCheck(r1,c1 + 1)){
-        if(board->board[r1][c1 + 1]->piece->color != same){
+    if(Validator::boundsCheck(r1, c1 + 1)) {
+        if(board->board[r1][c1 + 1]->piece->color != same) {
             coordinates.push_back(std::make_pair(r1, c1 + 1));
         }
     }
-    if(Validator::boundsCheck(r1,c1 - 1)){
-        if(board->board[r1][c1 - 1]->piece->color != same){
+    if(Validator::boundsCheck(r1, c1 - 1)) {
+        if(board->board[r1][c1 - 1]->piece->color != same) {
             coordinates.push_back(std::make_pair(r1, c1 - 1));
         }
     }
