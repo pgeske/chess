@@ -20,7 +20,7 @@ class Board {
     private:
         void initialize();
         void clear();
-        bool isValid(int r1, int c1, int r2, int c2);
+        std::pair<int, int> translatePosition(std::string);
 };
 
 #endif

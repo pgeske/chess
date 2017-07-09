@@ -98,6 +98,7 @@ void Board::start() {
 int Board::execute(int r1, int c1, int r2, int c2) {
     // Check to see if move is valid
     if (!Validator::validate(this, r1, c1, r2, c2)) return 1;
+
     // Move the piece and do any capturing if necessary
     Square *source = this->board[r1][c1];
     Square *dest = this->board[r2][c2];
@@ -107,13 +108,17 @@ int Board::execute(int r1, int c1, int r2, int c2) {
 }
 
 /**
- * True if the move from board[r1][c1] to board[r2][c2] is valid.
- * Otherwise, false.
+ * Given a position of the form e.g "e2", translates this into 
+ * a pair of coordinates.
  */
-bool Board::isValid(int r1, int c1, int r2, int c2) {
-    return false;
+std::pair<int, int> Board::translatePosition(std::string position) {
+    int row, col;
+    return std::make_pair(row, col);
 }
 
+/**
+ * Draws the board to cout. For testing purposes.
+ */
 void Board::draw_board(){
 	for (int row=0; row<BOARD_SIZE; row++){
 		std::cout<<"  ---------- "<<"  ----------  "<<"  ---------- "<<"  ---------- "<<"  ---------- "<<"  ---------- "<<"  ---------- "<<"  ---------- "<<std::endl;
