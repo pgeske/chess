@@ -14,6 +14,8 @@ Validator::~Validator() {
  * is valid. Otherwise, false.
  */
 bool Validator::validate(Board *board, int r1, int c1, int r2, int c2) {
+    // Check bounds for source
+    if (!Validator::boundsCheck(r1, c1)) return false;
     // Ensure source piece is the correct color
     Piece *piece = board->board[r1][c1]->piece;
     if (piece->color != board->turn) return false;
@@ -25,6 +27,8 @@ bool Validator::validate(Board *board, int r1, int c1, int r2, int c2) {
     }
     if (!canReach) return false;
     // Move the piece
+    Square *source = board->board[r1][c1];
+    Sqare *dest = board->board[r2][c2];
     // See if King is under attack. If so, move is invalid.
     // Undo the move
     return true;

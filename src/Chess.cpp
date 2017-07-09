@@ -13,8 +13,7 @@ int main() {
     b->start();
     b->execute(6, 0, 5, 0);
     b->draw_board();
-    bool valid = Validator::validate(b, 6, 1, 5, 1); 
-    cout << valid << "\n";
+    bool valid = Validator::validate(b, 1, 1, 2, 1); 
     /* vector<vector<int> > amap = Validator::attackMap(b, PieceColor::Black); */
     /* for (int i = 0; i < amap.size(); i++) { */
     /*     for (int j = 0; j < amap[i].size(); j++) { */
