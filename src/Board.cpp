@@ -1,4 +1,5 @@
 #include "Board.h"
+#include "Validator.h"
 
 /**
  * Returns new Board which is initialized with
@@ -95,11 +96,13 @@ void Board::start() {
  * returns 1.
  */
 int Board::execute(int r1, int c1, int r2, int c2) {
-    Square* source = this->board[r1][c1];
-    Square* dest = this->board[r2][c2];
-    Piece* piece = source->liftPiece();
+    // Check to see if move is valid
+    if (!Validator::validate(this, r1, c1, r2, c2)) return 1;
+    // Move the piece and do any capturing if necessary
+    Square *source = this->board[r1][c1];
+    Square *dest = this->board[r2][c2];
     dest->removePiece();
-    dest->piece = piece;
+    dest->piece = source->liftPiece();
     return 0;
 }
 
