@@ -113,6 +113,25 @@ int Board::execute(int r1, int c1, int r2, int c2) {
  */
 std::pair<int, int> Board::translatePosition(std::string position) {
     int row, col;
+    row = (int) position[1] - '0';
+    switch (position[0]) {
+        case 'a':
+            col = 0;
+        case 'b':
+            col = 1;
+        case 'c':
+            col = 2;
+        case 'd':
+            col = 3;
+        case 'e': 
+            col = 4;
+        case 'f':
+            col = 5;
+        case 'g':
+            col = 6;
+        case 'h':
+            col = 7;
+    }
     return std::make_pair(row, col);
 }
 
