@@ -14,6 +14,19 @@ Validator::~Validator() {
  * is valid. Otherwise, false.
  */
 bool Validator::validate(Board *board, int r1, int c1, int r2, int c2) {
+    // Ensure source piece is the correct color
+    Piece *piece = board->board[r1][c1]->piece;
+    if (piece->color != board->turn) return false;
+    // See if r2, c2 is a reachable coordinate. If not, move is invalid.
+    std::vector<std::pair<int, int> > reachable = Validator::generate(board, r1, c1);
+    bool canReach = false;
+    for (auto it = reachable.begin(); it != reachable.end(); ++it) {
+        if ((*it).first == r2 && (*it).second == c2) canReach = true;
+    }
+    if (!canReach) return false;
+    // Move the piece
+    // See if King is under attack. If so, move is invalid.
+    // Undo the move
     return true;
 }
 
