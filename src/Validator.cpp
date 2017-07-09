@@ -46,10 +46,13 @@ std::vector<std::vector<int> > Validator::attackMap(const Board *board, PieceCol
             std::vector<std::pair<int, int> > reachable = Validator::generate(board, i, j);
             for (int i = 0; i < reachable.size(); i++) {
                 std::pair<int, int> coord = reachable[i];
+                // For Pawn, not all reachable squares are attackable
+                if (piece->type == PieceType::Pawn && coord.second == j) continue;
                 attackMap[coord.first][coord.second] = 1;
             }
         }
     }
+    return attackMap;
 }
 
 /**
