@@ -14,6 +14,7 @@ Validator::~Validator() {
  * is valid. Otherwise, false.
  */
 bool Validator::validate(Board *board, int r1, int c1, int r2, int c2) {
+    PieceColor opposite = board->turn == PieceColor::Black ? PieceColor::White : PieceColor::Black;
     // Check bounds for source
     if (!Validator::boundsCheck(r1, c1)) return false;
     // Ensure source piece is the correct color
@@ -28,10 +29,24 @@ bool Validator::validate(Board *board, int r1, int c1, int r2, int c2) {
     if (!canReach) return false;
     // Move the piece
     Square *source = board->board[r1][c1];
-    Sqare *dest = board->board[r2][c2];
+    Square *dest = board->board[r2][c2];
+    Piece *tmp = dest->liftPiece();
+    dest->piece = source->liftPiece();
     // See if King is under attack. If so, move is invalid.
+    bool kingUnderAttack = false;
+    std::vector<std::vector<int> > attackMap = Validator::attackMap(board, opposite);
+    for (int i = 0; i < board->board.size(); i++) {
+        for (int j = 0; j < board->board[i].size(); j++) {
+            Piece *piece = board->board[i][j]->piece;
+            if (piece->type == PieceType::King && piece->color == board->turn) {
+                if (attackMap[i][j]) kingUnderAttack = true;
+            }
+        }
+    }
     // Undo the move
-    return true;
+    source->piece = dest->liftPiece();
+    dest->piece = tmp;
+    return !kingUnderAttack;
 }
 
 
